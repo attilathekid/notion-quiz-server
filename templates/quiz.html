@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Question Thingy</title>
+
+    <script type=text/javascript src="{{url_for('static', filename='jquery.js') }}"></script>
+    <script type=text/javascript src="{{url_for('static', filename='quiz.js') }}"></script>
+    <script>var correct = "{{ correct }}";</script>
+</head>
+<body>
+
+<!-- This is the actual quiz. -->
+<div id="quiz-container">
+<form id="quiz">
+    <h3>{{ question }}</h3>
+    {% for option in options %}
+        <label>
+            <input type="radio" name="{{ option }}">{{ option }}
+        </label><br>
+    {% endfor %}
+    <button id="submit">Submit</button>
+</form>
+</div>
+
+<!-- This will replace the quiz if the user gets the correct answer -->
+<div id="correct-answer" hidden>
+    <h3>That's Correct!</h3>
+</div>
+
+<!-- This will replace the quiz if the user gets the wrong answer -->
+<div id="wrong-answer" hidden>
+    <h3>Sorry, incorrect.</h3>
+</div>
+
+</body>
+</html>

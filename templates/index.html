@@ -1,0 +1,17 @@
+This is the Leo-o-matic quiz generator. To get a quiz, send a GET request to /make_quiz with these arguments:
+
+<ul>
+    <li>q: the question</li>
+    <li>o: a semicolon separated list of options</li>
+    <li>c: the index of the correct option (from 0)</li>
+</ul>
+
+Alternatively, you can use this form to generate the request. Upon submission, you will be automatically redirected to
+the quiz itself, and you can copy and paste the url to embed it in Notion.
+
+<form>
+    Question: <input type="text" name="q" value="Oh, I like my chicken..."><br>
+    Options (semicolon separated): <input type="text" name="o" value="baked;grilled;fried"><br>
+    Index of Correct Option: <input type="number" name="c" value="2"><br>
+    <input type="submit">
+</form>
