@@ -30,12 +30,14 @@
     </div>
     {% endfor %}
 
-    <button id="submit">Submit</button>
+    <button class="btn btn-primary" id="submit">Submit</button>
 </form>
 </div>
 
 <!-- This will replace the quiz if the user gets the correct answer -->
 <div class="container" id="correct-answer" hidden>
+    <!--<img src="https://media2.giphy.com/media/26BGP98lm74FJgfNS/giphy.gif"
+         style="width: 100px; height: 100px;">-->
     <p class="text-success bg-success">That's Correct!</p>
 </div>
 
@@ -44,5 +46,9 @@
     <p class="text-danger bg-danger">Sorry, incorrect.</p>
 </div>
 
+<!-- Reload button -->
+<div class="container" id="reload-button" hidden><button class="btn">Try again</button></div><br>
+
+<div class="container"><a href="/"><small>Create another quiz</small></a></div>
 </body>
 </html>

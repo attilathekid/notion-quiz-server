@@ -6,6 +6,7 @@ $(function (){
     //prevent reloading page and hide the quiz
     event.preventDefault();
     $(this).hide(function (){
+      $('#reload-button').show()
 
       //display screen dependent upon result
       if ($(this).serialize()==="answer="+correct){
@@ -14,5 +15,10 @@ $(function (){
         $("#wrong-answer").show();
       }
     })
+  })
+
+  // Reload the page when button is hit
+  $('#reload-button').click(function () {
+    location.reload()
   })
 })
