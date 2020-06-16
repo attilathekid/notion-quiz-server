@@ -8,7 +8,7 @@ $(function (){
     $(this).hide(function (){
 
       //display screen dependent upon result
-      if ($(this).serialize()===correct+"=on"){
+      if ($(this).serialize()==="answer="+correct){
         $("#correct-answer").show();
       } else {
         $("#wrong-answer").show();

@@ -2,35 +2,46 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Question Thingy</title>
 
+    <!-- jQuery and Bootstrap -->
     <script type=text/javascript src="{{url_for('static', filename='jquery.js') }}"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+    <!-- my scripts -->
     <script type=text/javascript src="{{url_for('static', filename='quiz.js') }}"></script>
     <script>var correct = "{{ correct }}";</script>
 </head>
 <body>
 
 <!-- This is the actual quiz. -->
-<div id="quiz-container">
+<div class="container" id="quiz-container">
 <form id="quiz">
-    <h3>{{ question }}</h3>
+    <h2>{{ question }}</h2>
+
+    <!-- Display the options -->
     {% for option in options %}
-        <label>
-            <input type="radio" name="{{ option }}">{{ option }}
-        </label><br>
+    <div class="custom-control custom-radio">
+        <input class="custom-control-input" type="radio" name="answer" value="{{ option }}" id="{{ option }}-option">
+        {{ option }}
+        <label class="custom-control-label" for="{{ option }}-option"></label>
+    </div>
     {% endfor %}
+
     <button id="submit">Submit</button>
 </form>
 </div>
 
 <!-- This will replace the quiz if the user gets the correct answer -->
-<div id="correct-answer" hidden>
-    <h3>That's Correct!</h3>
+<div class="container" id="correct-answer" hidden>
+    <p class="text-success bg-success">That's Correct!</p>
 </div>
 
 <!-- This will replace the quiz if the user gets the wrong answer -->
-<div id="wrong-answer" hidden>
-    <h3>Sorry, incorrect.</h3>
+<div class="container" id="wrong-answer" hidden>
+    <p class="text-danger bg-danger">Sorry, incorrect.</p>
 </div>
 
 </body>
