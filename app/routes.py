@@ -8,13 +8,13 @@ def index():
         q = request.args['q']
         o = request.args['o']
         c = request.args['c']
-        return redirect(f"/quiz?q={q}&o={o}&c={c}")
+        return redirect(f"/make_quiz?q={q}&o={o}&c={c}")
     except KeyError:
         return render_template('index.html')
 
 
-@app.route('/quiz')
-def quiz():
+@app.route('/make_quiz')
+def make_quiz():
     try:
         q = request.args['q']
         o = request.args['o'].split(";")
