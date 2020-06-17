@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Question Thingy</title>
+
+    <!-- jQuery and Bootstrap -->
+    <script type=text/javascript src="{{url_for('static', filename='jquery.js') }}"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<!-- Flashed messages -->
+<div class="container-fluid">
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+        <div class="container-fluid {% if message.class %}{{message.class}}{% endif %}">
+            {% if message.message %}
+                {{ message.message }}
+            {% else %}}
+                {{ message }}
+            {% endif %}
+        </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+</div>
+
+<!-- Actual website -->
+{% block content %}
+{% endblock %}
+
+</body>
+</html>

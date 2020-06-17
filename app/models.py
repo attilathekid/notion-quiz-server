@@ -1,5 +1,29 @@
-from app import db
+from app import db, login
 from pickle import dumps, loads
+from flask_login import UserMixin
+from werkzeug.security import generate_password_hash, check_password_hash
+
+
+class User(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True, index=True, unique=True)
+    username = db.Column(db.String(64), index=True, unique=True)
+    password_hash = db.Column(db.String(128))
+
+    def __init__(self, username, password, *args, **kwargs):
+        p_hash = generate_password_hash(password)
+        super().__init__(username=username.lower(), password_hash=p_hash, *args, **kwargs)
+
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
+
+
+@login.user_loader
+def load_user(id):
+    return User.query.get(int(id))
+
 
 # allows many to many relationship between Questions and Quizzes
 questions = db.Table(
@@ -10,7 +34,7 @@ questions = db.Table(
 
 
 class Quiz(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, index=True, unique=True)
     name = db.Column(db.String(128), index=True, unique=True)
     description = db.Column(db.String(256))  # will support html tags
     questions = db.relationship("Question", secondary=questions, lazy='subquery',
@@ -32,7 +56,7 @@ class Quiz(db.Model):
 
 
 class Question(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, index=True, unique=True)
     question = db.Column(db.String(128), index=True, unique=True)
     _options = db.Column(db.PickleType)  # list of options
     correct = db.Column(db.Integer)  # index of correct option

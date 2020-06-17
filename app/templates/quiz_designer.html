@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Question Thingy</title>
+
+    <!-- jQuery and Bootstrap -->
+    <script type=text/javascript src="{{url_for('static', filename='jquery.js') }}"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<div class="container">
+
+<h1>Welcome</h1>
+
+<p>This is the quiz generator. To get a quiz, send a GET request to /make_quiz with these arguments:</p>
+
+<ul>
+    <ol>q: the question</ol>
+    <ol>o: a semicolon separated list of options</ol>
+    <ol>c: the index of the correct option (from 0)</ol>
+</ul>
+
+<p>Alternatively, you can use this form to generate the request. Upon submission, you will be automatically redirected to
+the quiz itself, and you can copy and paste the url to embed it in Notion.</p>
+</div><br>
+
+<div class="container">
+<form class="form-group">
+    <label for="question-field" >Question: </label>
+    <input id="question-field" class="form-control" type="text" name="q" value="Oh, I like my chicken...">
+
+    <label for="options-field" >Options (semicolon separated): </label>
+    <input id="options-field" class="form-control" type="text" name="o" value="baked;grilled;fried">
+
+    <label for="correct-field" >Index of Correct Option: </label>
+    <input id="correct-field" class="form-control" type="number" name="c" value="2">
+
+    <input class="btn btn-primary" type="submit">
+</form>
+</div>
+
+</body>
+</html>
