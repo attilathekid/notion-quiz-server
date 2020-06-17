@@ -3,6 +3,7 @@ from app import app
 
 
 @app.route('/', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
 def index():
     try:
         q = request.args['q']
@@ -20,5 +21,5 @@ def make_quiz():
         o = request.args['o'].split(";")
         c = o[int(request.args['c'])]
         return render_template("quiz.html", question=q, options=o, correct=c)
-    except KeyError:
+    except KeyError:  # i.e., they want the page,
         return redirect("/")
