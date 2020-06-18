@@ -13,6 +13,9 @@ class User(UserMixin, db.Model):
         p_hash = generate_password_hash(password)
         super().__init__(username=username.lower(), password_hash=p_hash, *args, **kwargs)
 
+    def __repr__(self):
+        return f"<User: {self.username}>"
+
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 
@@ -41,7 +44,7 @@ class Quiz(db.Model):
                                 backref=db.backref('quizzes', lazy=True))
 
     def __repr__(self):
-        return f"<Quiz: {self.id}>"
+        return f"<Quiz: {self.id} {self.name[:10]}>"
 
     # add questions to a quiz from a list of their ids
     def questions_from_ids(self, q_ids: list):
@@ -69,4 +72,4 @@ class Question(db.Model):
         return loads(self._options)
 
     def __repr__(self):
-        return f"<Question: {self.id}>"
+        return f"<Question: {self.id} {self.question[:5]}...{self.question[-5:]}>"

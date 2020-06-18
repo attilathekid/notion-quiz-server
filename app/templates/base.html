@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="">
+
     <title>Question Thingy</title>
 
     <!-- jQuery and Bootstrap -->
@@ -10,18 +12,22 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
+    <!-- Page specific scripts -->
+    {% block scripts %}
+    {% endblock %}
+
 </head>
 <body>
 
 <!-- Flashed messages -->
-<div class="container-fluid">
+<div class="container">
 {% with messages = get_flashed_messages() %}
     {% if messages %}
         {% for message in messages %}
         <div class="container-fluid {% if message.class %}{{message.class}}{% endif %}">
             {% if message.message %}
                 {{ message.message }}
-            {% else %}}
+            {% else %}
                 {{ message }}
             {% endif %}
         </div>

@@ -2,7 +2,7 @@ from flask import render_template, request, redirect, url_for, flash
 from flask_login import current_user, login_user, logout_user, login_required
 
 from app import app
-from app.models import User
+from app.models import User, Quiz
 from app.forms import LoginForm
 
 
@@ -11,6 +11,15 @@ from app.forms import LoginForm
 @login_required
 def index():
     return render_template('index.html')
+
+
+@app.route('/embed_quiz', methods=['GET', 'POST'])
+def embed_quiz():
+    quiz = Quiz.query.filter_by(id=int(request.args['id'])).first()
+    if quiz is None:
+        return "Quiz not found"
+    else:
+        return render_template('embed_quiz.html', quiz=quiz)
 
 
 @app.route('/quiz_designer')
@@ -43,7 +52,6 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data.lower()).first()
-        print(f'Attempted Login: {user} {form.username.data.lower()} {form.password.data}')
         if user is None or not user.check_password(form.password.data):
             flash({'message': 'Invalid username or password', 'class': 'bg-danger text-danger'})
             return redirect(url_for('login'))

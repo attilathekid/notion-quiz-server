@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block scripts %}
+<script type=text/javascript src="{{url_for('static', filename='embed_quiz.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+
+{# First screen users will see #}
+<div class="container" id="container-intro">
+    <h1>{{ quiz.name }}</h1>
+    {{ quiz.description }}
+    <div id="start-button-container">
+        <br>
+        <button id="start-button" class="btn-primary btn">Start</button>
+    </div>
+</div>
+
+
+{# Pages with forms for all of the questions #}
+<form id="quiz">
+{% for question in quiz.questions %}
+
+<div class="container" id="container-question-{{ question.id }}" hidden>
+    <h3>{{ question.question }}</h3>
+
+    {# Display the options #}
+    {% for option in question.get_options() %}
+    <div class="custom-control custom-radio">
+        <input class="custom-control-input" type="radio" name="answer" value="{{ option }}" id="{{ option }}-option">
+        <label class="custom-control-label" for="{{ question.id }}-{{ option }}-option">{{ option }}</label>
+    </div>
+    {% endfor %}
+</div>
+
+{% endfor %}
+
+<div class="container" id="submit-button" hidden><br><input type="submit" class="btn-primary btn" hidden></div>
+</form>
+
+<div class="container" id="next-button-container" hidden>
+    <br>
+    <button class="btn-primary btn" id="next-button">Next</button>
+</div>
+
+{% endblock %}
